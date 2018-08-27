@@ -27,7 +27,7 @@ void setup()
   uSonarRangeMsg.header.frame_id = frameid;
   uSonarRangeMsg.field_of_view = 0.1; //fake???
   uSonarRangeMsg.min_range = 5;
-  usonarRangeMsg.max_range = MAX_DISTANCE;
+  uSonarRangeMsg.max_range = MAX_DISTANCE;
 }
 
 void loop() 
