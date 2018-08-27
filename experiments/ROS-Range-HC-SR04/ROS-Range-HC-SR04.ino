@@ -26,15 +26,15 @@ void setup()
   uSonarRangeMsg.radiation_type = sensor_msgs::Range::ULTRASOUND;
   uSonarRangeMsg.header.frame_id = frameid;
   uSonarRangeMsg.field_of_view = 0.1; //fake???
-  uSonarRangeMsg.min_range = 5;
-  uSonarRangeMsg.max_range = MAX_DISTANCE;
+  uSonarRangeMsg.min_range = 0.05;    // Meters
+  uSonarRangeMsg.max_range = 2;       // Meters
 }
 
 void loop() 
 {
   if(millis() >= range_time)
   {
-    uSonarRangeMsg.range = uSonar.ping_cm() / 100;
+    uSonarRangeMsg.range = (float)uSonar.ping_cm() / 100;
     uSonarRangeMsg.header.stamp = nh.now();
     pub_range.publish(&uSonarRangeMsg);
     range_time = millis() + 500;
