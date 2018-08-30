@@ -3,12 +3,12 @@
 	<!-- Base link position -->
 	<link name="base_link">
 		<visual>
-			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.06" />
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.12" />
 			<geometry>
-				<cylinder length="0.15" radius="0.2" />
+				<cylinder length="0.14" radius="0.1" />
 			</geometry>
 			<material name="blue">
-				<color rgba="0 0 1 0.5" />
+				<color rgba="0 0 1 1" />
 			</material>
 		</visual>
 	</link>
@@ -16,7 +16,7 @@
 	<link name="left_wheel">
 		<visual>
 			<geometry>
-				<cylinder length="0.01" radius="0.0730250" />
+				<cylinder length="0.009" radius="0.036" />
 			</geometry>
 			<material name="black">
 				<color rgba="0 0 0 1" />
@@ -24,7 +24,7 @@
 		</visual>
 		<collision>
 			<geometry>
-				<cylinder length="0.01" radius="0.0730250" />
+				<cylinder length="0.009" radius="0.036" />
 			</geometry>
 		</collision>
 	</link>
@@ -33,7 +33,7 @@
 		<axis xyz="0 0 -1" />
 		<parent link="base_link" />
 		<child link="left_wheel" />
-		<origin rpy="1.57075 0.0 0.0" xyz="0 0.07 0.05" />
+		<origin rpy="1.57075 0.0 0.0" xyz="0 0.071 0.036" />
 		<limit effort="2" velocity="10" />
 		<joint_properties damping="0.02" friction="0.04" />
 	</joint>
@@ -51,7 +51,7 @@
 	<link name="right_wheel">
 		<visual>
 			<geometry>
-				<cylinder length="0.01" radius="0.0730250" />
+				<cylinder length="0.009" radius="0.036" />
 			</geometry>
 			<material name="black">
 				<color rgba="0 0 0 1" />
@@ -59,7 +59,7 @@
 		</visual>
 		<collision>
 			<geometry>
-				<cylinder length="0.01" radius="0.0730250" />
+				<cylinder length="0.009" radius="0.036" />
 			</geometry>
 		</collision>
 	</link>
@@ -68,7 +68,7 @@
 		<axis xyz="0 0 -1" />
 		<parent link="base_link"/>
 		<child link="right_wheel"/>
-		<origin rpy="1.57075 0.0 0.0" xyz="0 -0.07 0.05" />
+		<origin rpy="1.57075 0.0 0.0" xyz="0 -0.071 0.036" />
 		<limit effort="2" velocity="10" />
 		<joint_properties damping="0.02" friction="0.04" />
 	</joint>
@@ -82,4 +82,22 @@
 			<hardwareInterface>VelocityJointInterface</hardwareInterface>
 		</joint>
 	</transmission>
+
+	<!-- US Sensor -->
+	<link  name="uSonarRange_topic">
+		<visual>
+			<geometry>
+				<box size="0.045 0.02 0.015" />
+			</geometry>
+			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<material name="black">
+				<color rgba="0 0 0 1">
+			</material>
+		</visual>
+	</link>
+	<joint name="base_link_to_base_uSonarRange_topic" type="fixed">>
+		<parent link="base_link" />
+		<child link="uSonarRange_topic" />
+		<origin xyz="0.09 0 0.08" rpy="0 0 0">
+	</joint>
 </robot>
