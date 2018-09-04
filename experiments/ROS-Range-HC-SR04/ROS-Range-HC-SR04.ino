@@ -25,7 +25,7 @@ void setup()
 
   uSonarRangeMsg.radiation_type = sensor_msgs::Range::ULTRASOUND;
   uSonarRangeMsg.header.frame_id = frameid;
-  uSonarRangeMsg.field_of_view = 0.1; //fake???
+  uSonarRangeMsg.field_of_view = 0.523599f; //30 degrees in radians
   uSonarRangeMsg.min_range = 0.05;    // Meters
   uSonarRangeMsg.max_range = 2;       // Meters
 }
@@ -42,5 +42,3 @@ void loop()
 
   nh.spinOnce();	// Is correct here? Or call only when have a new data?
 }
-
-
