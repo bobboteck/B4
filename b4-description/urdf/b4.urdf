@@ -66,8 +66,8 @@
 	<!-- Joint configuration left joint -->
 	<joint name="right_joint" type="continuous">
 		<axis xyz="0 0 -1" />
-		<parent link="base_link"/>
-		<child link="right_wheel"/>
+		<parent link="base_link" />
+		<child link="right_wheel" />
 		<origin rpy="1.57075 0.0 0.0" xyz="0 -0.071 0.036" />
 		<limit effort="2" velocity="10" />
 		<joint_properties damping="0.02" friction="0.04" />
@@ -91,13 +91,13 @@
 			</geometry>
 			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
 			<material name="black">
-				<color rgba="0 0 0 1">
+				<color rgba="0 0 0 1" />
 			</material>
 		</visual>
 	</link>
-	<joint name="base_link_to_base_uSonarRange_topic" type="fixed">>
+	<joint name="base_link_to_base_uSonarRange_topic" type="fixed">
 		<parent link="base_link" />
 		<child link="uSonarRange_topic" />
-		<origin xyz="0.09 0 0.08" rpy="0 0 0">
+		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
 	</joint>
 </robot>
