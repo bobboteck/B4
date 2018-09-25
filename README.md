@@ -2,6 +2,9 @@
 ![Ubuntu 16.04](https://img.shields.io/badge/Ubuntu-16.04-green.svg)
 ![ROS Kinetic Kame](https://img.shields.io/badge/ROS-Kinetic%20Kame-red.svg)
 [![License](https://img.shields.io/github/license/bobboteck/B4.svg?style=flat)](https://github.com/bobboteck/B4/blob/master/LICENSE)
+[![GitHub issues open](https://img.shields.io/github/issues-raw/bobboteck/b4.svg)](https://github.com/bobboteck/B4/issues) 
+[![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/bobboteck/b4.svg)](https://github.com/bobboteck/B4/issues)
+
 
 **B4** is an ambitious project of a small **Robot** based on **ROS**, designed primarily for home use, whose purpose is to interact with people and things that manage or monitor the domestic environment, but it could be used in any environment that needs to be controlled.
 Its name reads "Before", as well as being the quote of the name of a character in a TV series, indicates that it is a "First" version.
