@@ -21,4 +21,4 @@ The hardware of the **B4** project is based on a [PINE 64](https://www.pine64.or
 
 More information on how to build **B4** and all the experiments and tests carried out, are available at **[Wiki pages](https://github.com/bobboteck/B4/wiki)**.
 
-![B4](https://github.com/bobboteck/B4/blob/master/image/B4-Front.jpg)
+![B4](https://github.com/bobboteck/B4/blob/master/image/B4-Front-New.JPG)
