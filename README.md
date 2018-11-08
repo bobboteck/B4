@@ -11,6 +11,11 @@ Its name reads "Before", as well as being the quote of the name of a character i
 
 ***
 
+Play list of Video tutorial of the realization of B4
+[YouTube - Playlist video](https://www.youtube.com/playlist?list=PLGn3cWxishXIPDKOcuHAd7hoDZpIvQ3WS)
+
+***
+
 **B4** will be present at [Maker Faire Rome from 12 to 14 October 2018](https://2018.makerfairerome.eu/it/espositori/?ids=719), see you there in the Padiglione 7 Stand 4 with Officine Robotiche!
 
 ***
