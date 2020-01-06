@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/Program Files (x86)/Arduino/libraries/**",
+                "D:/Users/Bobboteck/Documents/Arduino/libraries/ros_lib/**",
+                "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino/**",
+                "C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/**",
+                "C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/7.3.0/include/**",
+                "C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/standard/**",
+                "D:/Users/${env:USERNAME}/Documents/Arduino/libraries/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}

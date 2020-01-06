@@ -46,12 +46,11 @@ void loop()
     delay(50);
     uint8_t sonar_temp = sonar[i].ping_cm();
     
-    /*
     // Use this to show data in to Arduino IDE Serial Monitor
     Serial.print(i);
     Serial.print("=");
     Serial.print(sonar_temp);
-    Serial.print("cm ");*/
+    Serial.print("cm ");
     // Use this to show data in to Arduino IDE Serial Plot
     Serial.print(sonar_temp);
     Serial.print(",");
@@ -69,7 +68,7 @@ void loop()
     u8g2.drawStr(20, 16+(16*i), ":");
     u8g2.drawStr(40, 16+(16*i), usRange);
   }
-  u8g2.sendBuffer();
+  //u8g2.sendBuffer();
   Serial.println();
 }
 
