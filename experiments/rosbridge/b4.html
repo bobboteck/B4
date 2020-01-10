@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+        <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+        <script type="text/javascript">
+let connectionError = false;
+// Initialize ROS Lib JS
+let ros = new ROSLIB.Ros();
+
+// If there is an error on the backend, an 'error' emit will be emitted.
+ros.on('error', function(error) 
+{
+    connectionError = true;
+    console.log(error);
+
+    let lblConnectionStatus = document.getElementById("ConnectionStatus");
+    lblConnectionStatus.innerText = "Error in the backend!";
+    lblConnectionStatus.style.color = "#FF0000";
+});
+
+// Find out exactly when we made a connection.
+ros.on('connection', function() 
+{
+    console.log('Connected ...');
+
+    let lblConnectionStatus = document.getElementById("ConnectionStatus");
+    lblConnectionStatus.innerText = "Connected";
+    lblConnectionStatus.style.color = "#00D600";
+});
+
+ros.on('close', function() 
+{
+    console.log('Connection closed.');
+
+    if(!connectionError)
+    {
+        let lblConnectionStatus = document.getElementById("ConnectionStatus");
+        lblConnectionStatus.innerText = "Connection closed.";
+        lblConnectionStatus.style.color = "#A0A0A0";
+    }
+});
+
+// Subscribing to a Topic of Sonar Range Center
+let listenerSonarRangeCenter = new ROSLIB.Topic(
+{
+    ros : ros,
+    name : '/topicSonarRangeCenter',
+    messageType : 'sensor_msgs/Range'
+});
+// Add a callback to be called every time a message is published on this topic.
+listenerSonarRangeCenter.subscribe(function(message)
+{
+    document.getElementById("USValueCenter").innerText = message.range;
+});
+// Subscribing to a Topic of Sonar Range Left
+let listenerSonarRangeLeft = new ROSLIB.Topic(
+{
+    ros : ros,
+    name : '/topicSonarRangeLeft',
+    messageType : 'sensor_msgs/Range'
+});
+// Add a callback to be called every time a message is published on this topic.
+listenerSonarRangeLeft.subscribe(function(message)
+{
+    document.getElementById("USValueLeft").innerText = message.range;
+});
+// Subscribing to a Topic of Sonar Range Left
+let listenerSonarRangeRight = new ROSLIB.Topic(
+{
+    ros : ros,
+    name : '/topicSonarRangeRight',
+    messageType : 'sensor_msgs/Range'
+});
+// Add a callback to be called every time a message is published on this topic.
+listenerSonarRangeRight.subscribe(function(message)
+{
+    document.getElementById("USValueRight").innerText = message.range;
+});
+    
+function Connection()
+{
+    document.getElementById("ConnectionStatus").innerText = "Connecting to rosbridge...";
+    let wsAddress = document.getElementById("WebSocketAddress").value;
+    // Create a connection to the rosbridge WebSocket server.
+    ros.connect(wsAddress);
+}
+        </script>
+    </head>
+
+    <body>
+        <h1>Basic roslibjs test to show B4 US Sensors value</h1>
+
+        <p>For use this page, power on the Robot and run the following commands, each in new terminal. After click on Connect button.</p>
+
+        <ol>
+            <li><tt>roscore</tt></li>
+            <li><tt>[sudo chmod 666 /dev/ttyUSB0]</tt> (optional only if you not definitive setting permission, as: <tt>sudo usermod -a -G dialout $USER</tt>)</li>
+            <li><tt>rosrun rosserial_python serial_node.py /dev/ttyUSB0</tt></li>
+            <li><tt>roslaunch rosbridge_server rosbridge_websocket.launch</tt></li>
+        </ol>
+
+        <div>
+            <label>Connenction to:</label>
+            <input type="text" id="WebSocketAddress" value="ws://pine64:9090" />
+            <input type="button" id="ConnectWebSocket" value="Connect" onclick="Connection()" />
+            <label>Current status:</label>
+            <label id="ConnectionStatus" style="font-weight: bold;">Not connected.</label>
+        </div>
+        <div style="margin-top: 30px;">
+            <div>
+                <label>Left: </label><label id="USValueLeft"></label>
+            </div>
+            <div>
+                <label>Center: </label><label id="USValueCenter"></label>
+            </div>
+            <div>
+                <label>Right: </label><label id="USValueRight"></label>
+            </div>
+        </div>
+    </body>
+</html>
