@@ -3,10 +3,10 @@
 	<!-- Base link position -->
 	<link name="base_link">
 		<visual>
-			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.12" />
 			<geometry>
-				<cylinder length="0.14" radius="0.1" />
+				<cylinder length="0.200" radius="0.1" />
 			</geometry>
+            <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.15" />
 			<material name="blue">
 				<color rgba="0 0 1 1" />
 			</material>
@@ -88,9 +88,9 @@
 	<link  name="topicSonarRangeCenter">
 		<visual>
 			<geometry>
-				<box size="0.045 0.02 0.015" /><!-- Define a Box element with dimension LxHxP in meters -->
+				<box size="0.015 0.045 0.020" /><!-- Define a Box element with dimension XxYxZ in meters -->
 			</geometry>
-			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
 			<material name="black">
 				<color rgba="0 0 0 1" />
 			</material>
@@ -99,15 +99,15 @@
 	<joint name="base_link_to_topicSonarRangeCenter" type="fixed">
 		<parent link="base_link" />
 		<child link="topicSonarRangeCenter" />
-		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
+		<origin xyz="0.095 0 0.106" rpy="0 0 0" />
 	</joint>
 	<!-- US Sensor - Left -->
 	<link  name="topicSonarRangeLeft">
 		<visual>
 			<geometry>
-				<box size="0.045 0.02 0.015" />
+				<box size="0.015 0.045 0.020" />
 			</geometry>
-			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
 			<material name="black">
 				<color rgba="0 0 0 1" />
 			</material>
@@ -116,15 +116,15 @@
 	<joint name="base_link_to_topicSonarRangeLeft" type="fixed">
 		<parent link="base_link" />
 		<child link="topicSonarRangeLeft" />
-		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
+		<origin xyz="0.085 -0.040 0.08" rpy="0 0 -0.523599" />
 	</joint>
 	<!-- US Sensor - Right -->
 	<link  name="topicSonarRangeRight">
 		<visual>
 			<geometry>
-				<box size="0.045 0.02 0.015" />
+				<box size="0.015 0.045 0.020" />
 			</geometry>
-			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
 			<material name="black">
 				<color rgba="0 0 0 1" />
 			</material>
@@ -133,6 +133,6 @@
 	<joint name="base_link_to_topicSonarRangeRight" type="fixed">
 		<parent link="base_link" />
 		<child link="topicSonarRangeRight" />
-		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
+		<origin xyz="0.085 0.040 0.08" rpy="0 0 0.523599" />
 	</joint>
 </robot>
