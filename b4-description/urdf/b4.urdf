@@ -83,8 +83,26 @@
 		</joint>
 	</transmission>
 
-	<!-- US Sensor -->
-	<link  name="uSonarRange_topic">
+	<!-- US Sensors -->
+	<!-- US Sensor - Center -->
+	<link  name="topicSonarRangeCenter">
+		<visual>
+			<geometry>
+				<box size="0.045 0.02 0.015" /><!-- Define a Box element with dimension LxHxP in meters -->
+			</geometry>
+			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<material name="black">
+				<color rgba="0 0 0 1" />
+			</material>
+		</visual>
+	</link>
+	<joint name="base_link_to_topicSonarRangeCenter" type="fixed">
+		<parent link="base_link" />
+		<child link="topicSonarRangeCenter" />
+		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
+	</joint>
+	<!-- US Sensor - Left -->
+	<link  name="topicSonarRangeLeft">
 		<visual>
 			<geometry>
 				<box size="0.045 0.02 0.015" />
@@ -95,9 +113,26 @@
 			</material>
 		</visual>
 	</link>
-	<joint name="base_link_to_base_uSonarRange_topic" type="fixed">
+	<joint name="base_link_to_topicSonarRangeLeft" type="fixed">
 		<parent link="base_link" />
-		<child link="uSonarRange_topic" />
+		<child link="topicSonarRangeLeft" />
+		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
+	</joint>
+	<!-- US Sensor - Right -->
+	<link  name="topicSonarRangeRight">
+		<visual>
+			<geometry>
+				<box size="0.045 0.02 0.015" />
+			</geometry>
+			<origin rpy="1.57075 0 1.57075" xyz="0.0 0.0 0.0" />
+			<material name="black">
+				<color rgba="0 0 0 1" />
+			</material>
+		</visual>
+	</link>
+	<joint name="base_link_to_topicSonarRangeRight" type="fixed">
+		<parent link="base_link" />
+		<child link="topicSonarRangeRight" />
 		<origin xyz="0.09 0 0.08" rpy="0 0 0" />
 	</joint>
 </robot>
