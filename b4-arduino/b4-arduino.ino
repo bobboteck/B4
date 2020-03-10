@@ -8,6 +8,7 @@
  * Date         Version     Modified By         Description
  * 2018-09-17   0.0.1       Roberto D'Amico     First version of code
  * 2020-01-01   0.1.0       Roberto D'Amico     Added filter functionality
+ * 2020-03-09   0.1.1       Roberto D'Amico     Fixed same errors in ROS object name for Sonar
  * 
  * Description:
  * This program use 3 US sensor HC-SR04, for each sensor signal was applied
@@ -49,7 +50,8 @@
 #define SONAR_NUM       3       // Number of sensors
 #define MAX_DISTANCE    200     // Maximum distance (in cm) to ping
 
-//long range_time;
+// Array of topics name
+char *topicName[] = { "topicSonarRangeLeft", "topicSonarRangeCenter", "topicSonarRangeRight" };
 
 // Sensor object array. For each sensor was specified trigger pin, echo pin, and max distance to ping
 NewPing sonar[SONAR_NUM] = 
@@ -71,7 +73,6 @@ LPF lpf[SONAR_NUM] =
 ros::NodeHandle nh;
 
 // ROS - Message type definition
-//sensor_msgs::Range uSonarLeftRangeMsg;
 sensor_msgs::Range rangeMessage[SONAR_NUM] =
 {
     sensor_msgs::Range(),
@@ -80,86 +81,41 @@ sensor_msgs::Range rangeMessage[SONAR_NUM] =
 };
 
 // ROS - Topics defintion
-//ros::Publisher pub_rangeLeft("topicSonarRangeLeft", &uSonarLeftRangeMsg);
-//ros::Publisher pub_rangeCenter("topicSonarRangeCenter", &uSonarCenterRangeMsg);
-//ros::Publisher pub_rangeRight("topicSonarRangeRight", &uSonarRightRangeMsg);
-
 ros::Publisher publisherRange[SONAR_NUM] =
 {
-    ros::Publisher("topicSonarRangeLeft", &rangeMessage[0]),
-    ros::Publisher("topicSonarRangeCenter", &rangeMessage[1]),
-    ros::Publisher("topicSonarRangeRight", &rangeMessage[2]),
+    ros::Publisher(topicName[0], &rangeMessage[0]),
+    ros::Publisher(topicName[1], &rangeMessage[1]),
+    ros::Publisher(topicName[2], &rangeMessage[2])
 };
 
 void setup() 
 {
-    //ROS
+    // ROS - initialize node
     nh.initNode();
-  //nh.advertise(pub_rangeLeft);
-  //nh.advertise(pub_rangeCenter);
-  //nh.advertise(pub_rangeRight);
-
+    // Message definition/configuration
     for(uint8_t i=0;i<SONAR_NUM;i++)
     {
         nh.advertise(publisherRange[i]);
 
         rangeMessage[i].radiation_type = sensor_msgs::Range::ULTRASOUND;
-        rangeMessage[i].header.frame_id = "frameSonarRangeLeft";
+        rangeMessage[i].header.frame_id = topicName[i];
         rangeMessage[i].field_of_view = 0.523599f;		//30 degrees in radians
         rangeMessage[i].min_range = 0.05;    			// Meters
         rangeMessage[i].max_range = 2;       			// Meters
     }
-
-/*
-  uSonarLeftRangeMsg.radiation_type = sensor_msgs::Range::ULTRASOUND;
-  uSonarLeftRangeMsg.header.frame_id = "frameSonarRangeLeft";
-  uSonarLeftRangeMsg.field_of_view = 0.523599f;		//30 degrees in radians
-  uSonarLeftRangeMsg.min_range = 0.05;    			// Meters
-  uSonarLeftRangeMsg.max_range = 2;       			// Meters
-  
-  uSonarCenterRangeMsg.radiation_type = sensor_msgs::Range::ULTRASOUND;
-  uSonarCenterRangeMsg.header.frame_id = "frameSonarRangeCenter";
-  uSonarCenterRangeMsg.field_of_view = 0.523599f;	//30 degrees in radians
-  uSonarCenterRangeMsg.min_range = 0.05;    		// Meters
-  uSonarCenterRangeMsg.max_range = 2;       		// Meters
-  
-  uSonarRightRangeMsg.radiation_type = sensor_msgs::Range::ULTRASOUND;
-  uSonarRightRangeMsg.header.frame_id = "frameSonarRangeRight";
-  uSonarRightRangeMsg.field_of_view = 0.523599f;	//30 degrees in radians
-  uSonarRightRangeMsg.min_range = 0.05;    			// Meters
-  uSonarRightRangeMsg.max_range = 2;       			// Meters
-  */
 }
 
 void loop() 
 {
-  /*if(millis() >= range_time)
-  {
-    uSonarLeftRangeMsg.range = (float)uSonarLeft.ping_cm() / 100;
-    uSonarLeftRangeMsg.header.stamp = nh.now();
-    pub_rangeLeft.publish(&uSonarLeftRangeMsg);
-	
-	uSonarCenterRangeMsg.range = (float)uSonarCenter.ping_cm() / 100;
-    uSonarCenterRangeMsg.header.stamp = nh.now();
-    pub_rangeCenter.publish(&uSonarCenterRangeMsg);
-	
-	uSonarRightRangeMsg.range = (float)uSonarRight.ping_cm() / 100;
-    uSonarRightRangeMsg.header.stamp = nh.now();
-    pub_rangeRight.publish(&uSonarRightRangeMsg);
-	
-    range_time = millis() + 500;
-  }*/
-
-
     // Loop through each sensor
     for (uint8_t i = 0; i < SONAR_NUM; i++)
     { 
         delay(200);
-        //
+        // Read sensor value
         uint8_t sonar_temp = sonar[i].ping_cm();
-        //
+        // Apply low pass filter
         double lpfValue = lpf[i].NextValue(sonar_temp);
-        //
+        // Add info to message and send it
         rangeMessage[i].range = (float)lpfValue / 100;
         rangeMessage[i].header.stamp = nh.now();
         publisherRange[i].publish(&rangeMessage[i]);
